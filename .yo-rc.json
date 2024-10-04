@@ -1,0 +1,14 @@
+{
+  "@plentymarkets/generator-plugin": {
+    "promptValues": {
+      "type": "template"
+    },
+    "answers": {
+      "name": "MorgenlandPersistentCart",
+      "author": "Rohan Shakya",
+      "type": "template",
+      "description": "Saves the shopping cart of your users across devices and restores the shopping cart when they log in.",
+      "version": "0.0.1"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "MorgenlandPersistentCart",
+  "description": "Saves the shopping cart of your users across devices and restores the shopping cart when they log in.",
+  "namespace": "MorgenlandPersistentCart",
+  "type": "template",
+  "version": "0.0.1",
+  "license": "AGPL-3.0",
+  "isClosedSource": "true",
+  "author": "Rohan Shakya",
+  "email": ["contact@shakyarohan.com.np"],
+  "phone": "+49 15733204095",
+  "keywords": ["morgenland", "persistent cart", "rohan", "template"],
+  "dependencies": {
+    "guzzlehttp/guzzle": "^7.7"
+  },
+  "serviceProvider": "MorgenlandPersistentCart\\Providers\\MorgenlandSearchServiceProvider",
+  "platform": {
+    "php": ">=7.3 <8.1"
+  }
+}
