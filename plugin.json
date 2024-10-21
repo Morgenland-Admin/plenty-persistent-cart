@@ -10,6 +10,7 @@
   "email": ["contact@shakyarohan.com.np"],
   "phone": "+49 15733204095",
   "keywords": ["morgenland", "persistent cart", "rohan", "template"],
+  "runOnBuild":["MorgenlandPersistentCart\\Migrations\\CreateToDoTable"],
   "dependencies": {
     "guzzlehttp/guzzle": "^7.7"
   },

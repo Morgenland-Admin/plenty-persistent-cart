@@ -8,15 +8,36 @@ class ComposerStaticInit62348b6b1888979cc33fa0500fad8ba4
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '2b9d0f43f9552984cfa82fee95491826' => __DIR__ . '/..' . '/sabre/event/lib/coroutine.php',
+        'd81bab31d3feb45bfe2f283ea3c8fdf7' => __DIR__ . '/..' . '/sabre/event/lib/Loop/functions.php',
+        'a1cce3d26cc15c00fcd0b3354bd72c88' => __DIR__ . '/..' . '/sabre/event/lib/Promise/functions.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
+        'caf3abc48ff070873ebdd8b0b3e3ed61' => __DIR__ . '/..' . '/felixfbecker/language-server/src/utils.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'p' => 
+        array (
+            'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'W' => 
+        array (
+            'Webmozart\\Assert\\' => 17,
+        ),
+        'S' => 
+        array (
+            'Sabre\\Event\\' => 12,
+        ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
+            'PhpParser\\' => 10,
+        ),
+        'L' => 
+        array (
+            'LanguageServer\\' => 15,
         ),
         'G' => 
         array (
@@ -24,17 +45,43 @@ class ComposerStaticInit62348b6b1888979cc33fa0500fad8ba4
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'A' => 
+        array (
+            'AdvancedJsonRpc\\' => 16,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'phpDocumentor\\Reflection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'Webmozart\\Assert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Sabre\\Event\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sabre/event/lib',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
+        ),
+        'PhpParser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
+        ),
+        'LanguageServer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/felixfbecker/language-server/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -48,6 +95,20 @@ class ComposerStaticInit62348b6b1888979cc33fa0500fad8ba4
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'AdvancedJsonRpc\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/felixfbecker/advanced-json-rpc/lib',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'J' => 
+        array (
+            'JsonMapper' => 
+            array (
+                0 => __DIR__ . '/..' . '/netresearch/jsonmapper/src',
+            ),
+        ),
     );
 
     public static $classMap = array (
@@ -59,6 +120,7 @@ class ComposerStaticInit62348b6b1888979cc33fa0500fad8ba4
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit62348b6b1888979cc33fa0500fad8ba4::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit62348b6b1888979cc33fa0500fad8ba4::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit62348b6b1888979cc33fa0500fad8ba4::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit62348b6b1888979cc33fa0500fad8ba4::$classMap;
 
         }, null, ClassLoader::class);

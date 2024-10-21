@@ -1,5 +1,6 @@
 {
     "require": {
-        "guzzlehttp/guzzle": "^7.7"
+        "guzzlehttp/guzzle": "^7.7",
+        "felixfbecker/language-server": "^2.3"
     }
 }
