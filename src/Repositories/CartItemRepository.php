@@ -17,6 +17,14 @@ class CartItemRepository implements CartItemRepositoryContract
         protected AccountService $accountService
     ){}
 
+    public function log(String $message):void{
+
+        $this
+            ->getLogger('Repository::createCartItem')
+            ->setReferenceType('EXCEPTION_PERMA_CART' ) // additional information is optional
+            ->info("Repository::log", ["message"=>"$message"]);
+    }
+
     /**
      * Create a new cart item, this will be in sync with the user basket items
      * @param BasketItem $data

@@ -2,7 +2,6 @@
 
 namespace MorgenlandPersistentCart\Providers;
 
-use GuzzleHttp\Exception\GuzzleException;
 use MorgenlandPersistentCart\Contracts\CartItemRepositoryContract;
 use MorgenlandPersistentCart\Exceptions\UserNotLoggedInException;
 use MorgenlandPersistentCart\Repositories\CartItemRepository;
@@ -10,9 +9,10 @@ use Plenty\Log\Services\ReferenceContainer;
 use Plenty\Modules\Basket\Events\BasketItem\AfterBasketItemAdd;
 use Plenty\Modules\Basket\Events\BasketItem\AfterBasketItemRemove;
 use Plenty\Modules\Basket\Events\BasketItem\AfterBasketItemUpdate;
+use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
 use Plenty\Plugin\Events\Dispatcher;
+use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\ServiceProvider;
-use GuzzleHttp\Client;
 
 /**
  * Class MorgenlandPersistentCartProvider
@@ -20,7 +20,7 @@ use GuzzleHttp\Client;
  */
 class MorgenlandPersistentCartProvider extends ServiceProvider
 {
-    public function boot(Dispatcher $dispatcher, ReferenceContainer $container)
+    public function boot(LibraryCallContract $libCall, Request $request, Dispatcher $dispatcher, ReferenceContainer $container)
     {
         $cartItemRepository = pluginApp(CartItemRepository::class);
         try{
@@ -51,16 +51,7 @@ class MorgenlandPersistentCartProvider extends ServiceProvider
         }
         catch(\Exception $exception){
             $error = $exception->__toString();
-            $client = new Client();
-            $client->request(
-                "POST",
-                "https://ntfy.sh/nirjalpaudel",
-                [
-                    "message"=>"Error in permaCart: $error"
-                ]
-            );
-        } catch (GuzzleException $e) {
-
+            $cartItemRepository->log("EXCEPTION OCCURRED: $error");
         }
     }
 
