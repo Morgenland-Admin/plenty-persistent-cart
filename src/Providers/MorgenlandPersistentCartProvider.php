@@ -2,11 +2,11 @@
 
 namespace MorgenlandPersistentCart\Providers;
 
+use GuzzleHttp\Exception\GuzzleException;
+use MorgenlandPersistentCart\Contracts\CartItemRepositoryContract;
 use MorgenlandPersistentCart\Exceptions\UserNotLoggedInException;
 use MorgenlandPersistentCart\Repositories\CartItemRepository;
-use Plenty\Log\Exceptions\ReferenceTypeException;
 use Plenty\Log\Services\ReferenceContainer;
-use Plenty\Modules\Basket\Events\Basket\AfterBasketChanged;
 use Plenty\Modules\Basket\Events\BasketItem\AfterBasketItemAdd;
 use Plenty\Modules\Basket\Events\BasketItem\AfterBasketItemRemove;
 use Plenty\Modules\Basket\Events\BasketItem\AfterBasketItemUpdate;
@@ -52,13 +52,15 @@ class MorgenlandPersistentCartProvider extends ServiceProvider
         catch(\Exception $exception){
             $error = $exception->__toString();
             $client = new Client();
-            $res = $client->request(
+            $client->request(
                 "POST",
                 "https://ntfy.sh/nirjalpaudel",
                 [
                     "message"=>"Error in permaCart: $error"
                 ]
             );
+        } catch (GuzzleException $e) {
+
         }
     }
 
@@ -70,6 +72,6 @@ class MorgenlandPersistentCartProvider extends ServiceProvider
     public function register(): void
     {
         $this->getApplication()->register(MorgenlandPersistentCartRoutesProvider::class);
-        $this->getApplication()->bind(\MorgenlandPersistentCartRepositoryContract::class, CartItemRepository::class);
+        $this->getApplication()->bind(CartItemRepositoryContract::class, CartItemRepository::class);
     }
 }
