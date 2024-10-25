@@ -14,16 +14,22 @@ class CartItemRepository implements CartItemRepositoryContract
     use Loggable;
 
     public function __construct(
-        protected AccountService $accountService
+        protected AccountService $accountService,
     ){}
 
-    public function log(String $message):void{
+    public function getCartForUser(int $userId): array
+    {
+        // TODO: Implement getCartForUser() method.
+        $database = pluginApp(DataBase::class);
 
-        $this
-            ->getLogger('Repository::createCartItem')
-            ->setReferenceType('EXCEPTION_PERMA_CART' ) // additional information is optional
-            ->info("Repository::log", ["message"=>"$message"]);
+        $cartItemList = $database->query(CartItem::class)
+            ->where('user_id', '=', $userId)
+            ->get();
+
+        return $cartItemList;
+
     }
+
 
     /**
      * Create a new cart item, this will be in sync with the user basket items
@@ -120,7 +126,6 @@ class CartItemRepository implements CartItemRepositoryContract
         if ($isAccountLoggedIn) {
             throw new UserNotLoggedInException("User is not logged in exception");
         }
-        $userId = $this->accountService->getAccountContactId();
         $this
             ->getLogger('Repository::updateCartItem')
             ->setReferenceType('cartItemId__basketItem' ) // additional information is optional

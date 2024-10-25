@@ -8,7 +8,17 @@ use \Plenty\Modules\Basket\Models\BasketItem;
 
 interface CartItemRepositoryContract
 {
+
+
+
     /**
+     * Get cart items for the user
+     * @param int $contactId
+     * @return array
+     */
+    public function getCartForUser(int $contactId):array;
+
+    /*
      * Create a new cart item, this will be in sync with the user basket items
      *
      * @param BasketItem $data
