@@ -35,6 +35,7 @@ class MorgenlandPersistentCartProvider extends ServiceProvider
         CartItemRepositoryContract $cartItemRepository,
     )
     {
+        $this->getLogger("permaCart")->info("MorgenlandPersistentCart Startup");
 
         try{
             $dispatcher->listen(AfterBasketItemAdd::class, function($event) use ($cartItemRepository) {
