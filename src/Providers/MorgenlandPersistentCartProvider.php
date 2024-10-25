@@ -15,7 +15,7 @@ use Plenty\Modules\Basket\Events\BasketItem\AfterBasketItemUpdate;
 use Plenty\Modules\Basket\Models\BasketItem;
 use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
 use Plenty\Plugin\Events\Dispatcher;
-use Plenty\Plugin\Http\Request;
+use Plenty\Plugin\Log\Loggable;
 use Plenty\Plugin\ServiceProvider;
 
 /**
@@ -24,6 +24,8 @@ use Plenty\Plugin\ServiceProvider;
  */
 class MorgenlandPersistentCartProvider extends ServiceProvider
 {
+    use Loggable;
+
     public function boot(
         LibraryCallContract $libCall,
         Dispatcher $dispatcher,
@@ -33,6 +35,7 @@ class MorgenlandPersistentCartProvider extends ServiceProvider
         CartItemRepositoryContract $cartItemRepository,
     )
     {
+
         try{
             $dispatcher->listen(AfterBasketItemAdd::class, function($event) use ($cartItemRepository) {
                 // manage all the basket items logic to db here
@@ -59,7 +62,14 @@ class MorgenlandPersistentCartProvider extends ServiceProvider
                 AfterAccountAuthentication::class, function(AfterAccountAuthentication $event
             ) use (
                 $cartItemRepository, $basketItemRepository, $basketRepository,
+
             ){
+
+                    $this->getLogger("permaCart")
+                          ->setReferenceType("permaCart")
+                          ->setReferenceValue("USER_LOGIN")
+                          ->info("User logged in");
+
                 // get the current user
                 $contact = $event->getAccountContact();
                 $userId = $contact->userId;
@@ -88,12 +98,10 @@ class MorgenlandPersistentCartProvider extends ServiceProvider
             });
 
         }
-        catch (UserNotLoggedInException $e){
-
-        }
         catch(\Exception $exception){
             $error = $exception->__toString();
-            $cartItemRepository->log("EXCEPTION OCCURRED: $error");
+            $this->getLogger("permaCart")
+                ->error($error);
         }
     }
 
