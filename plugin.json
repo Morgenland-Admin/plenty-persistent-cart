@@ -3,7 +3,7 @@
   "description": "Saves the shopping cart of your users across devices and restores the shopping cart when they log in.",
   "namespace": "MorgenlandPersistentCart",
   "type": "template",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "license": "AGPL-3.0",
   "isClosedSource": "true",
   "author": "Rohan Shakya",
