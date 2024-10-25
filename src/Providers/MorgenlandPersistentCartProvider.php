@@ -5,6 +5,7 @@ namespace MorgenlandPersistentCart\Providers;
 use MorgenlandPersistentCart\Contracts\CartItemRepositoryContract;
 use MorgenlandPersistentCart\Exceptions\UserNotLoggedInException;
 use MorgenlandPersistentCart\Repositories\CartItemRepository;
+use Plenty\Log\Exceptions\ReferenceTypeException;
 use Plenty\Log\Services\ReferenceContainer;
 use Plenty\Modules\Authentication\Events\AfterAccountAuthentication;
 use Plenty\Modules\Basket\Contracts\BasketItemRepositoryContract;
@@ -29,7 +30,7 @@ class MorgenlandPersistentCartProvider extends ServiceProvider
     public function boot(
         LibraryCallContract $libCall,
         Dispatcher $dispatcher,
-        ReferenceContainer $container,
+        ReferenceContainer $referenceContainer,
         BasketItemRepositoryContract $basketItemRepository,
         BasketRepositoryContract $basketRepository,
         CartItemRepositoryContract $cartItemRepository,
@@ -97,6 +98,15 @@ class MorgenlandPersistentCartProvider extends ServiceProvider
                     }
                 }
             });
+
+            try
+            {
+                $referenceContainer->add([ 'permaCart' => 'permaCart' ]); // reference is optional
+            }
+            catch(ReferenceTypeException $ex)
+            {
+
+            }
 
         }
         catch(\Exception $exception){
