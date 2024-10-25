@@ -3,7 +3,6 @@
 namespace MorgenlandPersistentCart\Providers;
 
 use MorgenlandPersistentCart\Contracts\CartItemRepositoryContract;
-use MorgenlandPersistentCart\Exceptions\UserNotLoggedInException;
 use MorgenlandPersistentCart\Repositories\CartItemRepository;
 use Plenty\Log\Exceptions\ReferenceTypeException;
 use Plenty\Log\Services\ReferenceContainer;
@@ -36,7 +35,7 @@ class MorgenlandPersistentCartProvider extends ServiceProvider
         CartItemRepositoryContract $cartItemRepository,
     )
     {
-        $this->getLogger("permaCart")->info("MorgenlandPersistentCart Startup");
+        $this->getLogger("permaCart")->setReferenceType("permaCart")->info("MorgenlandPersistentCart Startup");
 
         try{
             $dispatcher->listen(AfterBasketItemAdd::class, function($event) use ($cartItemRepository) {
@@ -112,6 +111,7 @@ class MorgenlandPersistentCartProvider extends ServiceProvider
         catch(\Exception $exception){
             $error = $exception->__toString();
             $this->getLogger("permaCart")
+                ->setReferenceType("permaCart")
                 ->error($error);
         }
     }
