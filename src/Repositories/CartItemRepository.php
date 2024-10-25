@@ -47,7 +47,7 @@ class CartItemRepository implements CartItemRepositoryContract
         $userId = $this->accountService->getAccountContactId();
         $this
             ->getLogger('Repository::createCartItem')
-            ->setReferenceType('userId__cartItemId' ) // additional information is optional
+            ->setReferenceType('permaCart' ) // additional information is optional
             ->setReferenceValue("$userId"."__"."$data->id") // additional information is optional
             ->info("Repository::createCartItem", ["userId"=> $userId, "basketItem->id" => $data->id, "saved"=>True]);
         /**
@@ -103,7 +103,7 @@ class CartItemRepository implements CartItemRepositoryContract
 
         $this
             ->getLogger('Repository::CreateCartItem')
-            ->setReferenceType('cartItemId__basketItem' ) // additional information is optional
+            ->setReferenceType('permaCart' ) // additional information is optional
             ->setReferenceValue("$userId"."__"."$data->id") // additional information is optional
             ->info("Repository::createCartItem", ["userId"=> $userId, "cartItem->id" => $data->id, "saved"=>True]);
         return $cartItem;
@@ -128,7 +128,7 @@ class CartItemRepository implements CartItemRepositoryContract
         }
         $this
             ->getLogger('Repository::updateCartItem')
-            ->setReferenceType('cartItemId__basketItem' ) // additional information is optional
+            ->setReferenceType('permaCart' ) // additional information is optional
             ->setReferenceValue("$cartItemId"."__"."$data->id") // additional information is optional
             ->info("Repository::updateCartItem", ["cartItemId"=> $cartItemId, "basketItem->id" => $data->id, "updated"=>False]);
         $database = pluginApp(DataBase::class);
@@ -182,7 +182,7 @@ class CartItemRepository implements CartItemRepositoryContract
 
         $this
             ->getLogger('Repository::updateCartItem')
-            ->setReferenceType('cartItemId__basketItem' ) // additional information is optional
+            ->setReferenceType('permaCart' ) // additional information is optional
             ->setReferenceValue("$cartItemId"."__"."$data->id") // additional information is optional
             ->info("Repository::updateCartItem", ["cartItemId"=> $cartItemId, "basketItem->id" => $data->id, "updated"=>False]);
 
@@ -209,7 +209,7 @@ class CartItemRepository implements CartItemRepositoryContract
         $userId = $this->accountService->getAccountContactId();
         $this
             ->getLogger('Repository::deleteCartItem')
-            ->setReferenceType('cartItemId' ) // additional information is optional
+            ->setReferenceType('permaCart' ) // additional information is optional
             ->setReferenceValue("$cartItemId") // additional information is optional
             ->info("Repository::updateCartItem", ["deleted"=>False]);
 
@@ -221,7 +221,7 @@ class CartItemRepository implements CartItemRepositoryContract
         $database->delete($cartItem);
         $this
             ->getLogger('Repository::deleteCartItem')
-            ->setReferenceType('cartItemId' ) // additional information is optional
+            ->setReferenceType('permaCart' ) // additional information is optional
             ->setReferenceValue("$cartItemId") // additional information is optional
             ->info("Repository::updateCartItem", ["deleted"=>True]);
 
